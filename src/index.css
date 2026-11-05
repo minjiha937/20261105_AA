@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+/* 시안의 차분한 한방병원 분위기를 재현하는 공통 색상과 크기 값입니다. */
+:root {
+  --ink: #23211e;
+  --muted: #736e64;
+  --cream: #f6f3eb;
+  --paper: #fffefa;
+  --brown: #765133;
+  --brown-light: #b6946c;
+  --olive: #4d5e43;
+  --dark: #2c241e;
+  --line: #e4dfd4;
+  --max-width: 1440px;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    min-width: 320px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  button, a { -webkit-tap-highlight-color: transparent; }
+  button { cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, p { word-break: keep-all; }
+}
+
+.page-shell {
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+  padding-inline: clamp(24px, 4.5vw, 72px);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: 80px;
+  border-bottom: 1px solid rgba(50, 42, 34, .08);
+  background: rgba(255, 254, 250, .96);
+  backdrop-filter: blur(12px);
+}
+.site-header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+.brand__mark { position: relative; display: block; width: 38px; height: 33px; }
+.brand__mark i { position: absolute; display: block; width: 10px; height: 22px; border-radius: 100% 0 100% 0; background: var(--olive); transform: rotate(35deg); }
+.brand__mark i:nth-child(1) { left: 1px; top: 8px; }
+.brand__mark i:nth-child(2) { left: 13px; top: 0; transform: rotate(-10deg); background: #75644a; }
+.brand__mark i:nth-child(3) { left: 26px; top: 8px; transform: rotate(-65deg); }
+.brand strong { display: block; font-size: 19px; line-height: 1.15; letter-spacing: -.06em; }
+.brand small { display: block; margin-top: 3px; color: #8f897f; font-size: 6px; letter-spacing: .08em; }
+.main-nav { display: flex; align-items: center; gap: clamp(24px, 3vw, 52px); font-size: 13px; }
+.main-nav a { position: relative; padding-block: 10px; }
+.main-nav a::after { position: absolute; right: 0; bottom: 2px; left: 0; height: 1px; background: var(--brown); content: ''; transform: scaleX(0); transition: transform .25s; }
+.main-nav a:hover::after { transform: scaleX(1); }
+.button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: 12px; border: 0; border-radius: 999px; padding: 0 28px; font-size: 13px; transition: transform .2s, background .2s; }
+.button:hover { transform: translateY(-2px); }
+.button--brown { background: var(--brown); color: #fff; }
+.button--brown:hover { background: #64452d; }
+.button--light, .button--white { background: #fff; color: #49443d; }
+.nav-reserve { min-width: 140px; }
+.menu-toggle { display: none; width: 42px; height: 42px; border: 0; background: transparent; padding: 9px; }
+.menu-toggle span { display: block; height: 1px; margin: 6px 0; background: var(--ink); transition: .25s; }
+
+/* 히어로는 좌우 1:1 비율이며 화면이 넓어져도 각 영역이 지나치게 늘어나지 않습니다. */
+.hero { display: grid; max-width: var(--max-width); min-height: 505px; margin-inline: auto; grid-template-columns: 1fr 1.15fr; overflow: hidden; }
+.hero__copy { display: flex; align-items: center; background: var(--cream); }
+.hero__copy-inner { width: min(100%, 580px); margin-left: auto; padding: clamp(48px, 6vw, 92px) clamp(28px, 5vw, 78px); }
+.eyebrow { margin-bottom: 24px; color: #605c54; font-size: 15px; }
+.hero h1 { font-size: clamp(38px, 4vw, 58px); font-weight: 600; letter-spacing: -.06em; line-height: 1.24; }
+.hero__description { margin-top: 32px; color: var(--muted); font-size: 15px; }
+.hero__actions { display: flex; gap: 12px; margin-top: 42px; }
+.slider-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 34px; }
+.slider-count { display: flex; align-items: center; gap: 13px; color: #777269; font-size: 11px; }
+.slider-count i { display: block; width: 64px; height: 1px; background: #908a7e; }
+.slider-buttons { display: flex; gap: 10px; }
+.slider-buttons button { display: grid; width: 40px; height: 40px; place-items: center; border: 0; border-radius: 50%; background: #ebe8df; color: #5c584f; }
+.hero__visual, .about__visual { min-width: 0; }
+.abstract-room { position: relative; height: 100%; min-height: 340px; overflow: hidden; background: #b59269; transition: background .45s; }
+.abstract-room__light { position: absolute; top: 9%; bottom: 20%; left: 8%; width: 35%; background: #d0ad84; }
+.abstract-room__wall { position: absolute; top: 7%; bottom: 20%; left: 48%; width: 5%; background: #e6d7bb; }
+.abstract-room__window { position: absolute; top: 13%; right: 10%; bottom: 20%; width: 33%; background: #715039; }
+.abstract-room__bench { position: absolute; right: 18%; bottom: 24%; left: 18%; height: 13%; background: var(--olive); box-shadow: 34px 18px 0 -5px #705039; }
+.abstract-room__floor { position: absolute; right: 0; bottom: 0; left: 0; height: 20%; background: #956b48; }
+.hero-art--sage { background: #a9ad94; }
+.hero-art--sage .abstract-room__window { background: #59644e; }
+.hero-art--sage .abstract-room__floor { background: #7c7d62; }
+.hero-art--rose { background: #c0a59c; }
+.hero-art--rose .abstract-room__window { background: #7b5950; }
+.hero-art--rose .abstract-room__floor { background: #96736a; }
+
+.strengths { display: grid; max-width: var(--max-width); min-height: 170px; margin-inline: auto; grid-template-columns: repeat(5, 1fr); }
+.strength { position: relative; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 28px 12px; text-align: center; }
+.strength + .strength::before { position: absolute; top: 25px; bottom: 25px; left: 0; width: 1px; background: var(--line); content: ''; }
+.strength__icon { height: 35px; color: var(--olive); font-family: Georgia, serif; font-size: 30px; line-height: 1; }
+.strength h3 { margin-top: 4px; font-size: 15px; font-weight: 600; }
+.strength p { margin-top: 10px; color: #888177; font-size: 11px; }
+
+.about { display: grid; max-width: var(--max-width); min-height: 420px; margin-inline: auto; grid-template-columns: .76fr 1.32fr; }
+.about__content { position: relative; display: flex; align-items: center; background: #eeebe0; padding: clamp(48px, 5.5vw, 84px); }
+.section-kicker { position: relative; padding-left: 24px; color: #6f695e; font-size: 13px; }
+.section-kicker::before { position: absolute; top: .75em; left: 0; width: 14px; height: 1px; background: #70695d; content: ''; }
+.about h2, .content-section h2, .rooms h2 { margin-top: 24px; font-size: clamp(28px, 3vw, 42px); font-weight: 600; letter-spacing: -.055em; line-height: 1.25; }
+.about__text > p:last-child { margin-top: 22px; color: var(--muted); font-size: 13px; }
+.about__features { position: absolute; bottom: 32px; left: clamp(48px, 5.5vw, 84px); display: grid; width: min(58%, 580px); border-radius: 4px; background: #fff; grid-template-columns: repeat(3, 1fr); }
+.about__features span { display: flex; align-items: center; flex-direction: column; gap: 4px; padding: 13px 6px; color: var(--olive); text-align: center; }
+.about__features span + span { border-left: 1px solid var(--line); }
+.about__features b { color: #625d54; font-size: 11px; font-weight: 500; }
+.video-button { position: absolute; right: 5%; bottom: 18px; display: flex; align-items: center; flex-direction: column; border: 0; background: transparent; }
+.video-button > span { display: grid; width: clamp(105px, 12vw, 150px); height: clamp(105px, 12vw, 150px); place-items: center; border-radius: 50%; background: #faf9f5; font-size: 18px; transition: transform .25s; }
+.video-button:hover > span { transform: scale(1.04); }
+.video-button small { margin-top: 12px; }
+
+.content-section { padding-block: clamp(55px, 6vw, 86px); }
+.section-heading { display: grid; align-items: end; grid-template-columns: 1fr 1.4fr auto; }
+.section-heading h2 { margin: 0; font-size: clamp(27px, 2.7vw, 38px); }
+.section-heading p { color: #8a8379; font-size: 12px; }
+.section-heading a { color: #625d55; font-size: 12px; }
+.clinic-grid { display: grid; gap: 16px; margin-top: 34px; grid-template-columns: repeat(6, 1fr); }
+.clinic-card { min-width: 0; }
+.clinic-art { position: relative; height: 148px; overflow: hidden; background: #c7bcaa; transition: transform .25s; }
+.clinic-card:hover .clinic-art { transform: translateY(-5px); }
+.clinic-art i { position: absolute; top: 16px; bottom: 16px; background: rgba(250, 247, 236, .82); }
+.clinic-art i:first-child { left: 8%; width: 37%; }
+.clinic-art i:last-child { right: 11%; bottom: 18px; width: 38%; height: 72%; background: rgba(224, 211, 180, .72); }
+.clinic-art--sand { background: #d8c6b1; }
+.clinic-art--sage { background: #b7baa9; }
+.clinic-art--rose { background: #d6c0b9; }
+.clinic-art--green { background: #b9c1af; }
+.clinic-art--blue { background: #afbcb5; }
+.clinic-card h3 { margin-top: 15px; font-size: 13px; font-weight: 600; }
+.clinic-card p { margin-top: 7px; color: #8a8379; font-size: 10px; }
+
+.rooms { background: var(--dark); color: #fff; }
+.rooms__inner { display: grid; min-height: 300px; align-items: center; grid-template-columns: .75fr 1.4fr; gap: 60px; padding-block: 55px; }
+.rooms h2 { margin: 0; font-size: clamp(28px, 3vw, 38px); }
+.rooms__intro p { margin: 18px 0 30px; color: #c1b9ae; font-size: 12px; }
+.room-gallery { display: grid; gap: 18px; grid-template-columns: repeat(4, 1fr); }
+.room-gallery button { border: 0; background: transparent; color: #eee8de; font-size: 11px; }
+.abstract-room--compact { min-height: 125px; border-radius: 4px; }
+.room-gallery span { display: block; margin-top: 12px; }
+.room-gallery button:hover .abstract-room { transform: translateY(-4px); }
+
+.information { background: #fff; }
+.information__inner { display: grid; grid-template-columns: 1.2fr 1.25fr 1fr .85fr; }
+.information article { min-height: 310px; padding: 38px 34px; }
+.information h2 { font-size: 17px; font-weight: 600; }
+.notice, .story { border-right: 1px solid var(--line); }
+.info-title { display: flex; justify-content: space-between; }
+.info-title a { color: #908a80; font-size: 10px; }
+.notice ul { margin-top: 20px; }
+.notice li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid var(--line); padding: 15px 0; font-size: 10px; }
+.notice time { flex: 0 0 auto; color: #9d968c; }
+.story blockquote { margin-top: 25px; border-radius: 5px; background: #faf8f1; padding: 24px 18px; font-size: 11px; }
+.story > p { margin-top: 20px; color: #8b857c; font-size: 10px; }
+.location { background: var(--olive); color: #fff; }
+.map-preview { display: grid; height: 105px; margin-top: 22px; place-items: center; border-radius: 4px; background: #e9e5d8; }
+.map-preview span { width: 18px; height: 18px; border: 5px solid var(--olive); border-radius: 50%; }
+.location p { margin-top: 18px; color: #e0ded5; font-size: 10px; }
+.location a { display: inline-block; margin-top: 18px; font-size: 11px; }
+.contact-card { background: var(--brown); color: #fff; }
+.phone { display: block; margin-top: 25px; font-size: clamp(18px, 2vw, 24px); font-weight: 600; white-space: nowrap; }
+.contact-card > p { margin-top: 20px; color: #eadfd5; font-size: 10px; }
+.contact-card > div { display: flex; align-items: center; gap: 18px; margin-top: 30px; }
+.contact-card > div > a { font-size: 10px; line-height: 1.3; }
+
+/* 팝업은 예약 폼과 병원 소개 영상 미리보기에 공통으로 사용합니다. */
+.modal-open { overflow: hidden; }
+.modal-backdrop { position: fixed; z-index: 100; display: grid; inset: 0; place-items: center; background: rgba(27, 22, 18, .65); padding: 20px; }
+.modal { position: relative; width: min(100%, 540px); max-height: calc(100dvh - 40px); overflow-y: auto; border-radius: 4px; background: var(--paper); padding: clamp(30px, 5vw, 54px); box-shadow: 0 30px 80px rgba(0, 0, 0, .25); }
+.modal__close { position: absolute; top: 14px; right: 18px; width: 36px; height: 36px; border: 0; background: transparent; color: #575147; font-size: 28px; }
+.modal h2 { margin-top: 16px; font-size: 30px; letter-spacing: -.04em; }
+.modal__description { margin: 8px 0 25px; color: var(--muted); }
+.reservation-form { display: grid; gap: 16px; }
+.reservation-form label { color: #5f5a52; font-size: 12px; }
+.reservation-form input, .reservation-form select { width: 100%; height: 48px; margin-top: 7px; border: 1px solid var(--line); border-radius: 2px; background: #fff; padding: 0 14px; color: var(--ink); outline: none; }
+.reservation-form input:focus, .reservation-form select:focus { border-color: var(--brown); }
+.reservation-form .button { margin-top: 8px; }
+.video-preview { margin-top: 24px; background: #eee9df; }
+.video-preview .abstract-room { min-height: 260px; }
+.video-preview > span { display: block; padding: 18px; color: #625c53; text-align: center; }
+.reservation-complete { padding-block: 20px; text-align: center; }
+.reservation-complete > span { display: grid; width: 60px; height: 60px; margin: 0 auto 18px; place-items: center; border-radius: 50%; background: var(--olive); color: #fff; font-size: 24px; }
+.reservation-complete p { margin: 12px 0 28px; color: var(--muted); }
+
+@media (max-width: 1024px) {
+  .site-header { height: 70px; }
+  .main-nav { gap: 20px; }
+  .main-nav > a:nth-of-type(4), .main-nav > a:nth-of-type(5) { display: none; }
+  .nav-reserve { min-width: 115px; padding-inline: 20px; }
+  .hero { min-height: 460px; }
+  .hero__copy-inner { padding: 55px 38px; }
+  .hero h1 { font-size: 40px; }
+  .about__content { padding: 55px 45px 105px; }
+  .about__features { bottom: 28px; left: 45px; width: 60%; }
+  .clinic-grid { grid-template-columns: repeat(3, 1fr); row-gap: 30px; }
+  .room-gallery { grid-template-columns: repeat(2, 1fr); }
+  .abstract-room--compact { min-height: 105px; }
+  .information__inner { grid-template-columns: 1fr 1fr; }
+  .information article { min-height: 285px; }
+  .story { border-right: 0; }
+}
+
+@media (max-width: 760px) {
+  .page-shell { padding-inline: clamp(20px, 6vw, 36px); }
+  .brand strong { font-size: 17px; }
+  .menu-toggle { display: block; }
+  .menu-toggle--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle--open span:nth-child(2) { opacity: 0; }
+  .menu-toggle--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .main-nav {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+    padding: 14px 24px 28px;
+    box-shadow: 0 15px 30px rgba(40, 34, 28, .1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: .25s;
+  }
+  .main-nav--open { opacity: 1; pointer-events: auto; transform: none; }
+  .main-nav > a, .main-nav > a:nth-of-type(4), .main-nav > a:nth-of-type(5) { display: block; border-bottom: 1px solid var(--line); padding: 14px 4px; }
+  .main-nav a::after { display: none; }
+  .nav-reserve { margin-top: 16px; }
+  .hero { display: flex; flex-direction: column; }
+  .hero__copy { min-height: 500px; }
+  .hero__copy-inner { width: 100%; margin: 0; padding: 55px clamp(24px, 7vw, 48px) 38px; }
+  .hero__visual { height: 330px; }
+  .hero h1 { font-size: clamp(36px, 10vw, 48px); }
+  .hero__actions { align-items: stretch; flex-direction: column; width: min(100%, 310px); }
+  .strengths { grid-template-columns: repeat(2, 1fr); }
+  .strength { min-height: 150px; border-bottom: 1px solid var(--line); }
+  .strength + .strength::before { display: none; }
+  .strength:nth-child(odd) { border-right: 1px solid var(--line); }
+  .strength:last-child { grid-column: 1 / -1; border-right: 0; }
+  .about { display: flex; flex-direction: column; }
+  .about__visual { height: 315px; }
+  .about__content { min-height: 500px; padding: 50px 24px 125px; }
+  .about__features { right: 24px; bottom: 28px; left: 24px; width: auto; }
+  .video-button { top: 45px; right: 24px; bottom: auto; }
+  .video-button > span { width: 78px; height: 78px; }
+  .video-button small { display: none; }
+  .section-heading { align-items: start; grid-template-columns: 1fr auto; }
+  .section-heading p { display: none; }
+  .clinic-grid { grid-template-columns: repeat(2, 1fr); }
+  .clinic-art { height: 130px; }
+  .rooms__inner { grid-template-columns: 1fr; gap: 40px; }
+  .room-gallery { gap: 14px; }
+  .information__inner { grid-template-columns: 1fr; padding: 0; }
+  .information article { min-height: auto; padding: 40px clamp(24px, 7vw, 44px); }
+  .notice, .story { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+@media (max-width: 420px) {
+  .hero__description br { display: none; }
+  .slider-count i { width: 45px; }
+  .about__features b { font-size: 9px; }
+  .clinic-grid { gap: 12px; row-gap: 28px; }
+  .clinic-art { height: 110px; }
+  .clinic-card h3 { font-size: 12px; }
+  .room-gallery { grid-template-columns: 1fr 1fr; }
+  .abstract-room--compact { min-height: 90px; }
+}
